@@ -5,6 +5,7 @@
 
 *.iml
 .idea
+**.retry
 # User-specific stuff:
 .idea/**/workspace.xml
 .idea/**/tasks.xml

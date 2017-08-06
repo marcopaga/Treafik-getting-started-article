@@ -1,0 +1,4 @@
+---
+
+- name: Run a hello world container.
+  shell: "docker run hello-world"
