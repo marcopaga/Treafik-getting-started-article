@@ -1,6 +1,6 @@
 172.16.2.10     server.test server
-172.16.2.10     whoami.test server
-172.16.2.10     api.test server
+172.16.2.10     whoami.server.test server
+172.16.2.10     api.server.test server
 
 172.16.2.11     client.test client
 

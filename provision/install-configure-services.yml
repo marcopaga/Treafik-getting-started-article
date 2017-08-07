@@ -1,0 +1,26 @@
+---
+- name: Create folder for the docker compose files
+  file:
+    path={{services_docker_build_path}}
+    state=directory
+    owner=root
+
+- name: Template Services docker-compose.yml
+  template:
+    src: templates/docker-compose-services.j2
+    dest: "{{services_docker_build_path}}/docker-compose.yml"
+    owner: root
+    group: root
+    mode: 644
+
+- name: Stop Services if they're up
+  shell: docker-compose stop
+  args:
+    chdir: "{{services_docker_build_path}}"
+  ignore_errors: yes
+
+- name: Fire up Services
+  shell: docker-compose --project-name {{services_project_name}} up -d
+  args:
+    chdir: "{{services_docker_build_path}}"
+
