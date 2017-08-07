@@ -12,20 +12,17 @@
     owner: root
     group: root
     mode: 644
-  sudo: yes
 
 - name: Stop traefik if it's up
   shell: docker-compose stop
   args:
     chdir: "{{traefik_docker_build_path}}"
-  sudo: yes
   ignore_errors: yes
 
 - name: Fire up Traefik
   shell: docker-compose --project-name {{traefik_project_name}} up -d
   args:
     chdir: "{{traefik_docker_build_path}}"
-  sudo: yes
 
 - name: Check if Traefik Port ist available on the machine
   wait_for:

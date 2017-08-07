@@ -1,17 +1,18 @@
 ---
-- name: Install dnsmasq (Simple DNS resolver)
-  apt:
-    name: dnsmasq
-    state: latest
-
 - name: Ignore DNS Servers from DHCP
   copy: src=templates/dhclient.conf dest=/etc/dhcp/dhclient.conf owner=root group=root mode=0644
 
-- name: Set dnsmasq configuration
-  copy: src=templates/dnsmasq.conf dest="/etc/dnsmasq.conf" owner=root group=root mode=644
+- name: Use our DNS server
+  shell: "echo 'nameserver: 172.16.2.10' >> /etc/resolvconf/resolv.conf.d/base"
 
-- name: Set our hostsfile that is used by dnsmasq to serve DNS requests
-  copy: src=templates/server-hostsfile dest="/etc/hosts" owner=root group=root mode=644
+- name: Ensure Resolvconf service is installed and restarted
+  service:
+    name: resolvconf
+    state: restarted
+    enabled: yes
+
+- name: Get a new DHCP Lease without DNS information
+  shell: "dhclient -r; dhclient"
 
 - name: Template network config for eth1
   template:
