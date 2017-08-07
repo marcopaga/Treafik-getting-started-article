@@ -12,6 +12,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "server" do |s|
         s.vm.hostname = "server"
         s.vm.network :private_network, ip:  "172.16.2.10", auto_config: false, virtualbox__intnet: "isolated_network"
+        s.vm.network "forwarded_port", guest: 8080, host: 8080
 
         s.vm.provision "ansible" do |ansible|
             ansible.playbook = "provision/playbook-server.yml"
