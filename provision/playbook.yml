@@ -2,12 +2,15 @@
 - hosts: all
   become: yes
   gather_facts: true
-  serial: 2
+  vars:
+    traefik_docker_build_path: /tmp/traefik-docker-build
+    traefik_project_name: traefik
+    dns_alias: server.test.de
 
   pre_tasks:
     - name: Update apt cache if needed.
       apt: update_cache=yes cache_valid_time=3600
 
   tasks:
-    - include: docker.yml
-    - include: service.yml
+    - include: install-docker.yml
+    - include: install-configure-traefik.yml

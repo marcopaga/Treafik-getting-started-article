@@ -1,0 +1,37 @@
+---
+- name: Create folder for the docker compose files
+  file:
+    path={{traefik_docker_build_path}}
+    state=directory
+    owner=root
+
+- name: Template Traefik docker-compose.yml
+  template:
+    src: templates/docker-compose-traefik.j2
+    dest: "{{traefik_docker_build_path}}/docker-compose.yml"
+    owner: root
+    group: root
+    mode: 644
+  sudo: yes
+
+- name: Stop traefik if it's up
+  shell: docker-compose stop
+  args:
+    chdir: "{{traefik_docker_build_path}}"
+  sudo: yes
+  ignore_errors: yes
+
+- name: Fire up Traefik
+  shell: docker-compose --project-name {{traefik_project_name}} up -d
+  args:
+    chdir: "{{traefik_docker_build_path}}"
+  sudo: yes
+
+- name: Check if Traefik Port ist available on the machine
+  wait_for:
+    host: localhost
+    port: 80
+    connect_timeout: 30
+    timeout: 60
+
+
