@@ -3,7 +3,7 @@
   copy: src=templates/dhclient.conf dest=/etc/dhcp/dhclient.conf owner=root group=root mode=0644
 
 - name: Use our DNS server
-  shell: "echo 'nameserver: 172.16.2.10' >> /etc/resolvconf/resolv.conf.d/base"
+  shell: "echo 'nameserver 172.16.2.10' >> /etc/resolvconf/resolv.conf.d/head"
 
 - name: Ensure Resolvconf service is installed and restarted
   service:
