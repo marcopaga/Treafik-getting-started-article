@@ -13,6 +13,12 @@
 - name: Set our hostsfile that is used by dnsmasq to serve DNS requests
   copy: src=templates/server-hostsfile dest="/etc/hosts" owner=root group=root mode=644
 
+- name: Restart dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted
+    enabled: yes
+
 - name: Template network config for eth1
   template:
     src: templates/eth1.cfg
