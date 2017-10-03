@@ -1,7 +1,7 @@
 
 # Intro
 
-This a the companion project for the [post](https://blog.codecentric.de/en/2017/09/traefik-modern-reverse-proxy/) on the codecentric blog. You can use it to follow along and setup your own environment to play with [Traefik](https://traefik.io/).
+This is the companion project for the [post](https://blog.codecentric.de/en/2017/09/traefik-modern-reverse-proxy/) on the codecentric blog. You can use it to follow along and setup your own environment to play with [Traefik](https://traefik.io/).
 
 Vagrant uses the ansible provisioner to bootstrap the machines. Have a look into the [provision directory](provision/) for details. The main entry file for the [server](provision/playbook-server.yml) and [client](provision/playbook-client.yml) are a good starting point.
 
