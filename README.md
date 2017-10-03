@@ -22,3 +22,9 @@ Now you work within the context of the test DNS Server and the demo Traefik inst
 Now you access the whoami docker container on the server
 
 `curl whoami.server.test`  
+
+# Configuration Files 
+
+* [docker-compose-services.j2](provision/templates/docker-compose-services.j2)
+* [docker-compose-traefik.j2](provision/templates/docker-compose-traefik.j2)
+* [server-hostsfile.j2](provision/templates/server-hostsfile)
